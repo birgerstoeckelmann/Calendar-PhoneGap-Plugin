@@ -654,6 +654,7 @@
   NSString* calendarName = [calOptions objectForKey:@"calendarName"];
   NSString* url = [calOptions objectForKey:@"url"];
   NSNumber* intervalAmount = [calOptions objectForKey:@"recurrenceInterval"];
+  BOOL allDay = [[calOptions objectForKey:@"allday"] boolValue];
 
   EKEvent *myEvent = [EKEvent eventWithEventStore: self.eventStore];
   if (url != (id)[NSNull null]) {
@@ -673,7 +674,7 @@
       NSTimeInterval _startInterval = [startTime doubleValue] / 1000; // strip millis
       int duration = _endInterval - _startInterval;
       int moduloDay = duration % (60 * 60 * 24);
-      if (moduloDay == 0) {
+      if (moduloDay == 0 && allDay == NO) {
         myEvent.allDay = YES;
         myEvent.endDate = [NSDate dateWithTimeIntervalSince1970:_endInterval - 1];
       } else {
