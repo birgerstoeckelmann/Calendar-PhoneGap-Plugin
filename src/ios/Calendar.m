@@ -674,7 +674,7 @@
       NSTimeInterval _startInterval = [startTime doubleValue] / 1000; // strip millis
       int duration = _endInterval - _startInterval;
       int moduloDay = duration % (60 * 60 * 24);
-      if (moduloDay == 0 && allDay == NO) {
+      if (moduloDay == 0 && allDay == YES) {
         myEvent.allDay = YES;
         myEvent.endDate = [NSDate dateWithTimeIntervalSince1970:_endInterval - 1];
       } else {
